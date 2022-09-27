@@ -8,6 +8,7 @@ const interModel = require("../Model/InternModel")
 };
   
 const getcollegeDetails= async function(req,res){
+     res.setHeader('Access-Control-Allow-Origin','*')
     try {
        let reqbody=req.body
        if (isValidRequest(reqbody)) return res.status(400).send({ status: false, msg: "invalid request in request body" })
@@ -31,7 +32,7 @@ const getcollegeDetails= async function(req,res){
         result.interns = interns
 
         if(Object.keys(interns).length == 0 ){
-        return res.status(400).send({status:true, msg:"no interns applied for this college"})
+        return res.status(400).send({status:false, msg:"no interns applied for this college"})
     }
       return res.status(200).send({status:true,data:result})
 
@@ -40,4 +41,4 @@ const getcollegeDetails= async function(req,res){
     }
 }
 
-module.exports.getcollegeDetails = getcollegeDetails
+module.exports.getcollegeDetails= getcollegeDetails
